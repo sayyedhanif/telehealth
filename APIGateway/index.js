@@ -22,12 +22,10 @@ app.post('/api/v1/schedular', function(req, res) {
     },function(err,response,body){
        console.log("err",err,"response",response.statusCode,"body",body)
         if(err){
-        console.log(err)
+            res(500, {error: err});
         }
         else{
-    
-               console.log(body)
-                  console.log(response.statusCode)
+            res(201, {message: 'Created!'});
         }
       })
     
@@ -47,13 +45,10 @@ app.get('/api/v1/schedular', function(req, res) {
     },function(err,response,body){
        console.log("err",err,"response",response.statusCode,"body",body)
         if(err){
-        console.log(err)
+            res(500, {error: err});
         }
         else{
-    
-               console.log(body)
-                  console.log(response.statusCode)
-                  res.json(body)
+            res.json(body)
         }
       })
 });
@@ -70,7 +65,7 @@ process.on('exit', function (){
 
 
 app.listen(3000, function () {
-  console.log('Example app listening on port 3000!')
+  console.log('APIGateway app server listening on port 3000!')
 })
 
 

@@ -1,0 +1,51 @@
+[
+    {
+      "type": "recurring",
+      "startDate": 1530383400000,
+      "endDate": 1543602600000,
+      "weekdays": [
+        "Monday",
+        "Wednesday"
+      ],
+      "startTime": 1530419400000,
+      "endTime": 1530430200000,
+      "excludedDates": [
+        "09/01/2018"
+      ]
+    },
+    {
+      "type": "single",
+      "select_date": 1535275800000,
+      "startTime": 1535275800000,
+      "endTime": 1535286600000,
+      "weekday": "Monday"
+    },
+    {
+      "type": "recurring",
+      "startDate": 1530383400000,
+      "endDate": 1543602600000,
+      "weekdays": [
+        "Monday",
+        "Wednesday"
+      ],
+      "startTime": 1530419400000,
+      "endTime": 1530430200000,
+      "excludedDates": [
+        "09/01/2018"
+      ]
+    },
+    {
+      "type": "single",
+      "select_date": 1535275800000,
+      "startTime": 1535275800000,
+      "endTime": 1535286600000,
+      "weekday": "Monday"
+    },
+    {
+      "type": "single",
+      "select_date": 1535275800000,
+      "startTime": 1535275800000,
+      "endTime": 1535286600000,
+      "weekday": "Monday"
+    }
+  ]
