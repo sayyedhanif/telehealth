@@ -20,12 +20,12 @@ app.post('/api/v1/schedular', function(req, res) {
             "Content-Type" : "application/json"
         }
     },function(err,response,body){
-       console.log("err",err,"response",response.statusCode,"body",body)
+       console.log("err",err,"body",body)
         if(err){
-            res(500, {error: err});
+            res.status(500).json({success: false, message: err});
         }
         else{
-            res(201, {message: 'Created!'});
+            res.status(201).json( {success: true, message: 'Created!', data: body});
         }
       })
     
@@ -43,12 +43,12 @@ app.get('/api/v1/schedular', function(req, res) {
             "Content-Type" : "application/json"
         }
     },function(err,response,body){
-       console.log("err",err,"response",response.statusCode,"body",body)
+       console.log("err",err,"body",body)
         if(err){
-            res(500, {error: err});
+            res.status(500).json({success: false, message: err});
         }
         else{
-            res.json(body)
+            res.json({success: true, message: 'Fetched list of schedulars!', data: body})
         }
       })
 });
@@ -66,7 +66,4 @@ process.on('exit', function (){
 
 app.listen(3000, function () {
   console.log('APIGateway app server listening on port 3000!')
-})
-
-
-//application/x-www-form-urlencoded
+});
