@@ -37,7 +37,7 @@ exports.create = function(req, res){
 exports.index= function(req,res){
     console.log("schedular server----->Schedualr get api request!-------------")
     console.log("req.body",req.body)
-    console.log("request.headers.host",req.headers.host)
+    console.log("request.headers.host",req.headers)
 
     Schedular.find({},function(err,schedulars){
         if (!err){

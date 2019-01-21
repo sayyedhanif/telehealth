@@ -6,6 +6,13 @@ var bodyParser = require('body-parser');
 // connect to middleware
 app.use(bodyParser.json());
 
+//for core access
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+  });
+
 // api routes
 app.post('/api/v1/schedular', function(req, res) {
     console.log("APIGateway server----->Schedualr post api request!-------------"); 
@@ -43,7 +50,7 @@ app.get('/api/v1/schedular', function(req, res) {
             "Content-Type" : "application/json"
         }
     },function(err,response,body){
-       console.log("err",err,"body",body)
+       console.log("err",err,"body",body, response)
         if(err){
             res.status(500).json({success: false, message: err});
         }

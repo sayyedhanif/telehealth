@@ -9,16 +9,22 @@ var schedualrController = require('./controllers/schedualr');
 
 // connnect mongoDB database
 try {
-  mongoose.connect(config.MongoDB.uri);
-  console.log("mongodb connected!")
+  mongoose.connect(config.MongoDB.uri);  
 } catch (error) {
-  console.log("Issue while connecting mongodb!")
+  console.log("Issue while connecting mongodb!");
   process.exit();
 }
-
+console.log("mongodb connected!");
 
 // connect to middleware
 app.use(bodyParser.json());
+
+//for core access
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
 // api routes
 app.post('/schedular', schedualrController.create);
