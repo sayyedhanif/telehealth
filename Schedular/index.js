@@ -42,6 +42,6 @@ process.on('exit', function (){
 });
 
 
-app.listen(3001, function () {
-  console.log('Schedular app server listening on port 3001!')
+app.listen(config.server.port, function () {
+  console.log('Schedular app server listening on port ', config.server.port)
 });

@@ -2,6 +2,7 @@ var express = require('express');
 var request = require('request');
 var app = express()
 var bodyParser = require('body-parser');
+var config = require("config");
 
 // connect to middleware
 app.use(bodyParser.json());
@@ -50,12 +51,16 @@ app.get('/api/v1/schedular', function(req, res) {
             "Content-Type" : "application/json"
         }
     },function(err,response,body){
-       console.log("err",err,"body",body, response)
+       console.log("err",err,typeof body)
         if(err){
             res.status(500).json({success: false, message: err});
         }
         else{
-            res.json({success: true, message: 'Fetched list of schedulars!', data: body})
+            if (body && typeof body !== 'string') {
+                res.json({success: true, message: 'Fetched list of schedulars!', data: body});
+            } else {
+                res.status(500).json({success: false, message: 'Internal server error!', data: {}});
+            }            
         }
       })
 });
@@ -71,6 +76,6 @@ process.on('exit', function (){
 });
 
 
-app.listen(3000, function () {
-  console.log('APIGateway app server listening on port 3000!')
+app.listen(config.server.port, function () {
+  console.log('APIGateway app server listening on port ', config.server.port)
 });
