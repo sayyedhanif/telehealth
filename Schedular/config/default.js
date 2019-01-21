@@ -4,7 +4,7 @@ module.exports = {
       maxBytes: 104857600,
     },
     MongoDB: {
-        uri: process.env.DB_URI,
+        uri: process.env.DB_URI || "mongodb://localhost/db_schedula"
     }
   };
   
