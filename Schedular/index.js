@@ -6,6 +6,7 @@ var config = require("config");
 
 var schedularList = require('./mock-data/getSchedular');
 var schedualrController = require('./controllers/schedualr');
+var tokboxController = require('./controllers/tokbox');
 
 // connnect mongoDB database
 try {
@@ -27,10 +28,14 @@ app.use(function(req, res, next) {
 });
 
 // api routes
+// for scheduling
 app.post('/schedular', schedualrController.create);
-
 app.get('/schedular', schedualrController.index);
 
+// for genearating call api
+// For this api need schedular id
+app.post('/telehealth/schedular/:id/call', tokboxController.initiateSession); 
+app.get('/telehealth/schedular/:id/call/', tokboxController.getSession);
 
 process.on('SIGINT', function () {
   console.log('Got SIGINT.  Press Control-D to exit.');
