@@ -2,9 +2,8 @@ var Schedular = require('../model/schedular')
 
 exports.create = function(req, res){
 
-    console.log("schedular server----->Schedualr post api request!-------------"); 
+    console.log("Schedular server----->schedualr post api request!-------------"); 
     console.log("req.body",req.body)
-    console.log("request.headers.host",req.headers.host);
 
 
     var schedular = new Schedular(req.body);
@@ -35,9 +34,8 @@ exports.create = function(req, res){
 };
 
 exports.index= function(req,res){
-    console.log("schedular server----->Schedualr get api request!-------------")
+    console.log("Schedular server----->schedualr get api request!-------------")
     console.log("req.body",req.body)
-    console.log("request.headers.host",req.headers)
 
     Schedular.find({},function(err,schedulars){
         if (!err){

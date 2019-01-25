@@ -3,9 +3,13 @@ var request = require('request');
 var app = express()
 var bodyParser = require('body-parser');
 var config = require("config");
+var morgan = require('morgan');
+const helmet = require('helmet');
 
 // connect to middleware
+app.use(helmet())
 app.use(bodyParser.json());
+app.use(morgan('tiny'))
 
 //for core access
 app.use(function(req, res, next) {
@@ -18,7 +22,6 @@ app.use(function(req, res, next) {
 app.post('/api/v1/schedular', function(req, res) {
     console.log("APIGateway server----->Schedualr post api request!-------------"); 
     console.log("req.body",req.body)
-    console.log("req.headers.host",req.headers.host)
     request({
         method : "POST",
         json : true,
@@ -42,7 +45,6 @@ app.post('/api/v1/schedular', function(req, res) {
 app.get('/api/v1/schedular', function(req, res) {
     console.log("APIGateway server----->Schedualr get api request!-------------")
     console.log("req.body",req.body)
-    console.log("req.headers.host",req.headers.host);
     request({
         method : "GET",
         json : true,

@@ -3,6 +3,8 @@ var app = express()
 var bodyParser = require('body-parser');
 var mongoose = require("mongoose");
 var config = require("config");
+var morgan = require('morgan');
+const helmet = require('helmet')
 
 var schedularList = require('./mock-data/getSchedular');
 var schedualrController = require('./controllers/schedualr');
@@ -18,7 +20,9 @@ try {
 console.log("mongodb connected!");
 
 // connect to middleware
+app.use(helmet());
 app.use(bodyParser.json());
+app.use(morgan('tiny'));
 
 //for core access
 app.use(function(req, res, next) {
