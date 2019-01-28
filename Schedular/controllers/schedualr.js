@@ -1,8 +1,10 @@
+var _ = require('lodash')
+
 var Schedular = require('../model/schedular')
 
 exports.create = function(req, res){
 
-    console.log("Schedular server----->schedualr post api request!-------------"); 
+    console.log("Schedular server----->schedulars post api request!-------------"); 
     console.log("req.body",req.body)
 
 
@@ -11,13 +13,11 @@ exports.create = function(req, res){
     schedular.save(function(err,schedular){
         if(err){
             if(err.code===11000){
-                //res.redirect( '/user/new?exists=true' );
                 res.json(500, {error: 'schedular already exist with this name!'});
             } else{             
                 res.json(500, {error: 'error in creating schedular!'});
             }
         } else{
-        //res.redirect('/users/index');
         var parsedData = schedular.toJSON();
 
         if (parsedData.type === 'single') {
@@ -34,11 +34,25 @@ exports.create = function(req, res){
 };
 
 exports.index= function(req,res){
-    console.log("Schedular server----->schedualr get api request!-------------")
+    console.log("Schedular server----->schedulars get api request!-------------")
     console.log("req.body",req.body)
 
-    Schedular.find({},function(err,schedulars){
-        if (!err){
+    Schedular.find().lean().exec(function(err,schedulars) {
+        if(err){          
+            return res.json(500, {error: err});
+        } else if (schedulars && _.isEmpty(schedulars)){
+            return res.json(500, {error: 'Internal server error!'});
+        } else {
+            _.each(schedulars, (schedular)  => {
+                if (schedular.type === 'single') {
+                    schedular.select_date = new Date(schedular.select_date).getTime();
+                } else {
+                    schedular.startDate = new Date(schedular.startDate).getTime();
+                    schedular.endDate = new Date(schedular.endDate).getTime();
+                }
+                schedular.startTime = new Date(schedular.startTime).getTime();
+                schedular.endTime = new Date(schedular.endTime).getTime();
+            });
             res.json(schedulars);
         }
     });
