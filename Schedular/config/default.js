@@ -8,8 +8,8 @@ module.exports = {
       uri: process.env.DB_URI || "mongodb://localhost/db_schedular"
   },
   tokbox: {
-    apiKey: process.env.DB_URI || "apiKey_is_here",
-    apiSecret: process.env.DB_URI || "apiSecret_is_here"
+    apiKey: process.env.TOKBOX_API_KEY || "apiKey_is_here",
+    apiSecret: process.env.TOKBOX_API_SECRET || "apiSecret_is_here"
   }
 };
   

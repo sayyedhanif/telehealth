@@ -21,15 +21,17 @@ exports.initiateSession = function(req, res){
         if( !data) {
             return res.status(404).json({success:false, message: "Not found"});
         }
-        opentok.createSession({mediaMode:"relayed"}, async function(error, session) {
-            if (error) {
-                console.log("Error creating session:", error)
-                res.json(500, {error: 'error in creating session!'});
-            } else {
-                var token = session.generateToken()
+        // opentok.createSession({mediaMode:"relayed"}, async function(error, session) {
+        //     if (error) {
+        //         console.log("Error creating session:", error)
+        //         res.json(500, {error: 'error in creating session!'});
+        //     } else {
+                // var token = session.generateToken()
+                var token = 'session.generateToken()'
                 var obj =  {
                     token: token,
-                    sessionId: session.sessionId,
+                    // sessionId: session.sessionId,
+                    sessionId: 'session.sessionId',
                     schedularId: req.params.id
                 };
                 var openTokDoc = new TokBox(obj);
@@ -42,8 +44,8 @@ exports.initiateSession = function(req, res){
                         res.json(obj);
                     }
                 });
-            }
-        });        
+        //     }
+        // });        
     });
 
 
@@ -61,7 +63,7 @@ exports.getSession= function(req,res){
         if( err) {
             return res.status(500).json({success:false, message: err});
         }
-        if( !data) {
+        if( !result) {
             return res.status(404).json({success:false, message: "Not found any session data!"});
         }
 
