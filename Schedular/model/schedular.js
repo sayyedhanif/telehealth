@@ -11,7 +11,7 @@ var schedularSchema = mongoose.Schema({
     endDate: {type: 'Date'},
     startTime: {type: 'Date', required: true},
     endTime: {type: 'Date', required: true},
-    weekdays: {type: 'String', enum : ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']},
+    weekdays: {type: [String], enum : ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']},
     excludedDates: [String]
 }, {
     timestamps: true

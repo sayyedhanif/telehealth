@@ -21,7 +21,7 @@ app.use(function(req, res, next) {
 // api routes
 app.post('/api/v1/schedular', function(req, res) {
     console.log("APIGateway server----->Schedualr post api request!-------------"); 
-    console.log("req.body",req.body)
+    console.log("req.body",req.body);
     request({
         method : "POST",
         json : true,
