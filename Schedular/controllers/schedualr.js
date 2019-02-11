@@ -7,7 +7,6 @@ exports.create = function(req, res){
     console.log("Schedular server----->schedulars post api request!-------------"); 
     console.log("req.body",req.body)
 
-
     var schedular = new Schedular(req.body);
 
     schedular.save(function(err,schedular){
@@ -18,19 +17,17 @@ exports.create = function(req, res){
                 res.json(500, {error: 'error in creating schedular!'});
             }
         } else{
-        var parsedData = schedular.toJSON();
+            var parsedData = schedular.toJSON();
 
-        if (parsedData.type === 'single') {
-            parsedData.select_date = new Date(parsedData.select_date).getTime();
-        } else {
-            parsedData.startDate = new Date(parsedData.startDate).getTime();
-            parsedData.endDate = new Date(parsedData.endDate).getTime();
+            if (parsedData.type === 'single') {
+                parsedData.select_date = new Date(parsedData.select_date).getTime();
+            } else {
+                parsedData.startDate = new Date(parsedData.startDate).getTime();
+                parsedData.endDate = new Date(parsedData.endDate).getTime();
+            }
+            res.json(parsedData);
         }
-        parsedData.startTime = new Date(parsedData.startTime).getTime();
-        parsedData.endTime = new Date(parsedData.endTime).getTime();
-        res.json(parsedData);
-    }
-  });
+    });
 };
 
 exports.index= function(req,res){
@@ -50,8 +47,6 @@ exports.index= function(req,res){
                     schedular.startDate = new Date(schedular.startDate).getTime();
                     schedular.endDate = new Date(schedular.endDate).getTime();
                 }
-                schedular.startTime = new Date(schedular.startTime).getTime();
-                schedular.endTime = new Date(schedular.endTime).getTime();
             });
             res.json(schedulars);
         }
